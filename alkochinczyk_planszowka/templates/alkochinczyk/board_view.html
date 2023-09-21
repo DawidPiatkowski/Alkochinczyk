@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+    <html lang="pl">
+        <head>
+            <meta charset="UTF-8">
+            <title>ALKOCHINCZYK - GRA DLA DOROSŁYCH</title>
+        </head>
+    <body>
+    <h1>Witam wszystkich w grze ALKOCHIŃCZYK</h1>
+        <div class="board">
+            {% for property in properties %}
+                <div class="property">
+                    <span class="name">{{ property.name }}</span>
+                    <span class="price">${{ property.price }}</span>
+                    {% if property.owner %}
+                        <span class="owner">Owned by: {{ property.owner.name }}</span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+    </html>
