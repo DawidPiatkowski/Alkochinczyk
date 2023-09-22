@@ -1,0 +1,30 @@
+.board_view {
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    border: 2px solid #000;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.place {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 18px;
+}
+
+.price {
+    font-size: 16px;
+}
+
+.owner {
+    font-size: 14px;
+}

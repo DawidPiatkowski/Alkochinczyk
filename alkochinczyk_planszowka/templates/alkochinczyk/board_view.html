@@ -3,19 +3,30 @@
         <head>
             <meta charset="UTF-8">
             <title>ALKOCHINCZYK - GRA DLA DOROSŁYCH</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         </head>
     <body>
     <h1>Witam wszystkich w grze ALKOCHIŃCZYK</h1>
-        <div class="board">
-            {% for property in properties %}
-                <div class="property">
-                    <span class="name">{{ property.name }}</span>
-                    <span class="price">${{ property.price }}</span>
-                    {% if property.owner %}
-                        <span class="owner">Owned by: {{ property.owner.name }}</span>
-                    {% endif %}
-                </div>
+        <div class="board_view">
+        <!-- Wyświetlamy planszę Monopoly -->
+        <table>
+            <tr>
+                <th>Place</th>
+                <th>Owner</th>
+            </tr>
+            {% for row in board_view %}
+            <tr>
+                <td>{{ place.name }}</td>
+            </tr>
             {% endfor %}
-        </div>
+        </table>
+    </div>
+    <div class="players">
+        <!-- Wyświetlamy listę graczy -->
+        <ul>
+            {% for player in players %}
+            <li>{{ player.name }} (Money: ${{ player.money }})</li>
+            {% endfor %}
+        </ul>
     </body>
     </html>
