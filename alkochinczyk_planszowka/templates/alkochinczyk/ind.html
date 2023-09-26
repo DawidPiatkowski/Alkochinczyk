@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% extends 'alkochinczyk/point.html' %}
+
+{% block content %}
+
+<p>Start a <a href="new_game">new game</a> already</p>
+
+{% if games %}
+<ul>
+    {% for game in games %}
+    <li><a href="/alkochinczyk/{{ game.id }}/">{{ game }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No existing games !</p>
+{% endif %}
+
+{% if form %}
+<div id="new_game">
+    <h2>New Game</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+{% endif %}
+{% endblock %}
+</html>

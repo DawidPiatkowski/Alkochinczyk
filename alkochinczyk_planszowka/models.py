@@ -1,29 +1,61 @@
+from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 
+
 class Player(models.Model):
-    name = models.CharField(max_length=100)
-    money = models.IntegerField(default=1500)
-    position = models.IntegerField(default=0)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.person.__str__()
 
-class Place(models.Model):
-    name = models.CharField(max_length=100)
-    price = models.IntegerField()
-    owner = models.ForeignKey(Player, on_delete=models.CASCADE, null=True, blank=True)
+
+class Game(models.Model):
+    players = models.ManyToManyField(Player, through='Account')
+    start_time = models.DateTimeField(auto_now=True)
+
+    @property
+    def __str__(self):
+        return "Game: %s" % str(self.id)
+
+
+class Account(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    balance = models.IntegerField()
+
+    class Meta:
+        unique_together = ('game', 'player',)
 
     def __str__(self):
-        return self.name
+        return str(self.player)
 
-class ChanceCard(models.Model):
-    description = models.TextField()
 
-    def __str__(self):
-        return self.description
-
-class CommunityChestCard(models.Model):
-    description = models.TextField()
+class Transaction(models.Model):
+    payer_account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='payer_account')
+    payee_account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='payee_account')
+    amount = models.PositiveIntegerField()
+    description = models.CharField(max_length=255, blank=True, default='')
 
     def __str__(self):
-        return self.description
+        msg = "%s paid to %s %d." % (
+            self.payer_account.player.person.username,
+            self.payee_account.player.person.username,
+            self.amount
+        )
+        if self.description:
+            msg += " Remarks: %s" % (self.description)
+
+        return msg
+
+    def clean(self):
+        if self.payer_account.balance < self.amount:
+            raise ValidationError(
+                ('Payer account balance is not sufficient to complete this transaction, short by %d' % (
+                        self.amount - self.payer_account.balance)))
+
+        if self.payer_account.id == self.payee_account_id:
+            raise ValidationError(('Payer and payee account must not be same'))
+
+        if self.amount == 0:
+            raise ValidationError(('Transaction amount can not be zero'))

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% extends 'alkochinczyk/point.html' %}
+
+{% block content %}
+
+{% if form %}
+<div id="new_transaction">
+    <h2>New Transaction</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+{% endif %}
+
+<br>
+
+<div id="balance">
+{% if game_accounts %}
+    <table>
+        <tr>
+            <th>Player</th>
+            <th class="col2h">Balance</th>
+        </tr>
+        {% for account in game_accounts %}
+        <tr>
+            <td>{{ account.player }}</td>
+            <td class="col2">{{ account.balance}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+<p>Hmm, Looks like someone went backstage and created the game without any players.
+        Contact admin to add players !</p>
+{% endif %}
+</div>
+
+<br>
+
+{% if recent_transactions %}
+<div id="recent_transactions">
+    <table>
+        <tr>
+            <th>Recent Transactions</th>
+        </tr>
+        {% for transaction in recent_transactions %}
+        <tr>
+            <td>{{ transaction }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+{% endblock %}
+</html>

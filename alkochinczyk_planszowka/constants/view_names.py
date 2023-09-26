@@ -1,0 +1,3 @@
+INDEX_VIEW_NAME = 'ind'
+NEW_GAME_VIEW_NAME = 'new_game'
+GAME_DETAIL_VIEW_NAME = 'detal'

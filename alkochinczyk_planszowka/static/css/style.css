@@ -1,30 +1,59 @@
-.board_view {
-    width: 800px;
-    height: 800px;
-    margin: 0 auto;
-    border: 2px solid #000;
-    display: flex;
-    flex-wrap: wrap;
+div#new_transaction {
+    width: 50%;
+    position: absolute;
+    margin-right: 0px;
 }
 
-.place {
-    width: 200px;
-    height: 200px;
-    border: 1px solid #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+div#balance {
+    border-color: cornflowerblue;
+    border-style: solid;
+    position: absolute;
+    float: left;
+    padding: 0.5%;
+    left:50%;
 }
 
-.name {
-    font-size: 18px;
+div#balance table tbody tr td {
+    width:90px;
 }
 
-.price {
-    font-size: 16px;
+div#balance table tbody tr th {
+   color:darkblue;
 }
 
-.owner {
-    font-size: 14px;
+div#balance table tbody tr .col2 {
+    text-align:right;
+    color:green
+}
+
+div#balance table tbody tr:nth-child(even) {
+    background:bisque
+}
+
+div#balance table tbody tr .col2h {
+   text-align:right;
+}
+
+
+div#recent_transactions table tbody th {
+    color:darkblue
+}
+
+div#recent_transactions table tbody tr:nth-child(even) {
+    background:bisque;
+}
+
+div#recent_transactions table tbody tr:nth-child(odd) {
+   /*background:#B8CCE4*/
+}
+
+div#recent_transactions {
+    border-color: cornflowerblue;
+    border-style: solid;
+    position: absolute;
+    float: left;
+    padding: 0.5%;
+    top: 200px;
+    left: 50%;
+    width: fit-content;
 }

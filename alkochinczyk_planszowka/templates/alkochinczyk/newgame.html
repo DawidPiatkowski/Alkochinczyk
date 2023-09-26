@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+{% extends 'alkochinczyk/point.html' %}
+
+{% block content %}
+
+{% if form %}
+<div id="newgame">
+    <h2>Choose players for the New Game</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {% csrf_token %}
+        <table>{{ form.as_table }}</table>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}
+</html>
