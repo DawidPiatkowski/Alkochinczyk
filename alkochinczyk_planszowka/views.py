@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import generic, View
+from django.http import HttpResponse
 
 from alkochinczyk_planszowka.constants.view_names import GAME_DETAIL_VIEW_NAME
 from alkochinczyk_planszowka.forms import GameForm, TransactionForm
@@ -47,8 +48,8 @@ class GameDetailView(View):
 
 
 class NewGameView(View):
-    form_class = Game
-    template_name = 'alkochinczyk/newgame.html'
+    form_class = GameForm
+    template_name = 'alkochinczyk/ind.html'
 
     def get(self, request):
         context = {

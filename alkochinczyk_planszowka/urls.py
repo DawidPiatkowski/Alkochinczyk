@@ -2,6 +2,7 @@ from django.urls import path
 
 from alkochinczyk_planszowka.views import NewGameView, GameDetailView, IndexView
 from alkochinczyk_planszowka.constants.view_names import GAME_DETAIL_VIEW_NAME, INDEX_VIEW_NAME, NEW_GAME_VIEW_NAME
+from . import views
 
 app_name = 'Alkochinczyk'
 

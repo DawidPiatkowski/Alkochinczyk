@@ -4,12 +4,12 @@
 
 {% block content %}
 
-<p>Start a <a href="new_game">new game</a> already</p>
+<p>Start a <a href="/alkochinczyk_planszowka/newgame">new game</a> already</p>
 
 {% if games %}
 <ul>
-    {% for game in games %}
-    <li><a href="/alkochinczyk/{{ game.id }}/">{{ game }}</a></li>
+    {% for game in game %}
+    <li><a href="/alkochinczyk_planszowka/{{ game.id }}/">{{ game }}</a></li>
     {% endfor %}
 </ul>
 {% else %}
